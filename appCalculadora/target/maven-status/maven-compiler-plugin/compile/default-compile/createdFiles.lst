@@ -1,0 +1,4 @@
+com\com470\calculadoraApp\model\OperationModel.class
+com\com470\calculadoraApp\CalculadoraAppApplication.class
+com\com470\calculadoraApp\controllers\CalculatorController.class
+com\com470\calculadoraApp\service\CalculateSimple.class
