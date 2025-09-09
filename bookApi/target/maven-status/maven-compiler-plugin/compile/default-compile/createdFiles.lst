@@ -1,0 +1,7 @@
+com\com470\bookApi\model\Review.class
+com\com470\bookApi\controller\BookController.class
+com\com470\bookApi\controller\ReviewController.class
+com\com470\bookApi\repository\ReviewRepository.class
+com\com470\bookApi\repository\BookRepository.class
+com\com470\bookApi\BookApiApplication.class
+com\com470\bookApi\model\Book.class
