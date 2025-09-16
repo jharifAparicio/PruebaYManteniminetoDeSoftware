@@ -1,0 +1,159 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CuentaServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.test.springboot.app.services</a>
+</div>
+
+<h1>Coverage Summary for Class: CuentaServiceImpl (com.test.springboot.app.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CuentaServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.test.springboot.app.services;
+&nbsp;
+&nbsp;import com.test.springboot.app.models.Banco;
+&nbsp;import com.test.springboot.app.models.Cuenta;
+&nbsp;import com.test.springboot.app.repositories.BancoRepository;
+&nbsp;import com.test.springboot.app.repositories.CuentaRepository;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;
+&nbsp;public class CuentaServiceImpl  implements CuentaService {
+&nbsp;
+&nbsp;    private CuentaRepository cuentaRespository;
+&nbsp;
+&nbsp;    private BancoRepository bancoRepository;
+&nbsp;
+<b class="fc">&nbsp;    public CuentaServiceImpl(CuentaRepository cuentaRespository, BancoRepository bancoRepository) {</b>
+<b class="fc">&nbsp;        this.cuentaRespository = cuentaRespository;</b>
+<b class="fc">&nbsp;        this.bancoRepository = bancoRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Cuenta findById(Long id) {
+<b class="fc">&nbsp;        return cuentaRespository.findById(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int revisarTotalTransferencias(Long bancoId) {
+<b class="fc">&nbsp;        Banco banco = bancoRepository.findById(bancoId);</b>
+<b class="fc">&nbsp;        return banco.getTotalTransferencias();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public BigDecimal revisarSaldo(Long cuentaId) {
+<b class="fc">&nbsp;         Cuenta cuenta = cuentaRespository.findById(cuentaId);</b>
+<b class="fc">&nbsp;        return cuenta.getSaldo();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void transferir(Long numCuentaOrigen, Long numCuentaDestino, BigDecimal monto, Long bancoId) {
+&nbsp;
+<b class="fc">&nbsp;        Cuenta cuentaOrigen=cuentaRespository.findById(numCuentaOrigen);</b>
+<b class="fc">&nbsp;        cuentaOrigen.debito(monto);</b>
+<b class="fc">&nbsp;        cuentaRespository.update(cuentaOrigen);</b>
+&nbsp;
+<b class="fc">&nbsp;        Cuenta cuentaDestino= cuentaRespository.findById(numCuentaDestino);</b>
+<b class="fc">&nbsp;        cuentaDestino.credito(monto);</b>
+<b class="fc">&nbsp;        cuentaRespository.update(cuentaDestino);</b>
+&nbsp;
+<b class="fc">&nbsp;        Banco banco = bancoRepository.findById(bancoId);</b>
+<b class="fc">&nbsp;        int totalTransferencias = banco.getTotalTransferencias();</b>
+&nbsp;        //banco.setTotalTransferencias(banco.getTotalTransferencias() + totalTransferencias);
+<b class="fc">&nbsp;        banco.setTotalTransferencias(++totalTransferencias);</b>
+<b class="fc">&nbsp;        bancoRepository.update(banco);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-16 19:22</div>
+</div>
+</body>
+</html>
