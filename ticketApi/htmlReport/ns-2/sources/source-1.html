@@ -1,0 +1,143 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > TicketController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.co470.ticketApi.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: TicketController (com.co470.ticketApi.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TicketController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.co470.ticketApi.controller;
+&nbsp;
+&nbsp;import com.co470.ticketApi.entities.Ticket;
+&nbsp;import com.co470.ticketApi.service.TicketService;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(value=&quot;api/tickets&quot;)
+<b class="fc">&nbsp;public class TicketController {</b>
+&nbsp;    @Autowired
+&nbsp;    TicketService ticketService;
+&nbsp;
+&nbsp;    @PostMapping(value=&quot;/create&quot;)
+&nbsp;    public Ticket createTicket(@RequestBody Ticket ticket) {
+<b class="fc">&nbsp;        return ticketService.createTicket(ticket);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(value=&quot;/ticket/{ticketId}&quot;)
+&nbsp;    public Ticket getTicketById(@PathVariable(&quot;ticketId&quot;)Integer ticketId) {
+&nbsp;        //return ticketService.getTicketById(ticketId).orElseThrow();
+<b class="fc">&nbsp;        return ticketService.getTicketById(ticketId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(value=&quot;/ticket/alltickets&quot;)
+&nbsp;    public Iterable&lt;Ticket&gt; getAllTickets(){
+<b class="fc">&nbsp;        return ticketService.getAllTickets();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @DeleteMapping(value=&quot;/ticket/{ticketId}&quot;)
+&nbsp;    public void deleteTicket(@PathVariable(&quot;ticketId&quot;)Integer ticketId) {
+<b class="fc">&nbsp;        ticketService.deleteTicket(ticketId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PutMapping(value=&quot;/ticket/{ticketId}/{newEmail:.+}&quot;)
+&nbsp;    public Ticket updateTicket(@PathVariable(&quot;ticketId&quot;)int  ticketId, @PathVariable(&quot;newEmail&quot;)String email) {
+<b class="fc">&nbsp;        return ticketService.updateTicket(ticketId, email);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-05-08 19:24</div>
+</div>
+</body>
+</html>
