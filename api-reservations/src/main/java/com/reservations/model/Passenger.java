@@ -65,9 +65,13 @@ public class Passenger {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Passenger passenger = (Passenger) o;
-        return Objects.equals(id, passenger.id) && Objects.equals(firstName, passenger.firstName) && Objects.equals(lastName, passenger.lastName) && Objects.equals(documentNumber, passenger.documentNumber) && Objects.equals(documentType, passenger.documentType) && Objects.equals(birthday, passenger.birthday);
+        return Objects.equals(id, passenger.id) && Objects.equals(firstName, passenger.firstName)
+                && Objects.equals(lastName, passenger.lastName)
+                && Objects.equals(documentNumber, passenger.documentNumber)
+                && Objects.equals(documentType, passenger.documentType) && Objects.equals(birthday, passenger.birthday);
     }
 
     @Override

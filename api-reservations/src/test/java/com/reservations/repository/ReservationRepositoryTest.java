@@ -47,7 +47,7 @@ class ReservationRepositoryTest {
                 () -> assertEquals(getreservation(1L, "EZE", "MIA"), result.get()));
     }
 
-        private Reservation getreservation(Long id, String origin, String destination) {
+    private Reservation getreservation(Long id, String origin, String destination) {
         Passenger passenger = new Passenger();
         passenger.setFirstName("Andres");
         passenger.setLastName("Sacco");

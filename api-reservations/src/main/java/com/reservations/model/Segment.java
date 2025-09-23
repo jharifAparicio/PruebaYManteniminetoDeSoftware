@@ -65,9 +65,12 @@ public class Segment {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Segment segment = (Segment) o;
-        return Objects.equals(id, segment.id) && Objects.equals(origin, segment.origin) && Objects.equals(destination, segment.destination) && Objects.equals(departure, segment.departure) && Objects.equals(arrival, segment.arrival) && Objects.equals(carrier, segment.carrier);
+        return Objects.equals(id, segment.id) && Objects.equals(origin, segment.origin)
+                && Objects.equals(destination, segment.destination) && Objects.equals(departure, segment.departure)
+                && Objects.equals(arrival, segment.arrival) && Objects.equals(carrier, segment.carrier);
     }
 
     @Override
