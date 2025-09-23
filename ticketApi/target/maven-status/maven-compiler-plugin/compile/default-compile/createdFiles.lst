@@ -1,0 +1,5 @@
+com\co470\ticketApi\dao\TicketDao.class
+com\co470\ticketApi\service\TicketService.class
+com\co470\ticketApi\controller\TicketController.class
+com\co470\ticketApi\TicketApiApplication.class
+com\co470\ticketApi\entities\Ticket.class
