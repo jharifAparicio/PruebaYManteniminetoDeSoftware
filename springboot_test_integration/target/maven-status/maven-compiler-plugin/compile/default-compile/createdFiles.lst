@@ -1,0 +1,12 @@
+org\sqa\test\springboot\app\models\TransaccionDto.class
+org\sqa\test\springboot\app\services\CuentaServiceImpl.class
+org\sqa\test\springboot\app\models\Banco.class
+org\sqa\test\springboot\app\models\Cuenta.class
+org\sqa\test\springboot\app\Datos.class
+org\sqa\test\springboot\app\SpringFoxConfig.class
+org\sqa\test\springboot\app\repositories\CuentaRepository.class
+org\sqa\test\springboot\app\controllers\CuentaController.class
+org\sqa\test\springboot\app\exceptions\DineroInsuficienteException.class
+org\sqa\test\springboot\app\SpringbootTestApplication.class
+org\sqa\test\springboot\app\repositories\BancoRepository.class
+org\sqa\test\springboot\app\services\CuentaService.class

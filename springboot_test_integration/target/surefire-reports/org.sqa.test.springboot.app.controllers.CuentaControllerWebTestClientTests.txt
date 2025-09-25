@@ -1,0 +1,21 @@
+-------------------------------------------------------------------------------
+Test set: org.sqa.test.springboot.app.controllers.CuentaControllerWebTestClientTests
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 7.035 s <<< FAILURE! -- in org.sqa.test.springboot.app.controllers.CuentaControllerWebTestClientTests
+org.sqa.test.springboot.app.controllers.CuentaControllerWebTestClientTests.testListar2 -- Time elapsed: 0.058 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <2100.0> but was: <2100.00>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at org.sqa.test.springboot.app.controllers.CuentaControllerWebTestClientTests.lambda$testListar2$3(CuentaControllerWebTestClientTests.java:150)
+	at org.springframework.test.web.reactive.server.DefaultWebTestClient$DefaultBodySpec.lambda$consumeWith$4(DefaultWebTestClient.java:587)
+	at org.springframework.test.web.reactive.server.ExchangeResult.assertWithDiagnostics(ExchangeResult.java:232)
+	at org.springframework.test.web.reactive.server.DefaultWebTestClient$DefaultBodySpec.consumeWith(DefaultWebTestClient.java:587)
+	at org.sqa.test.springboot.app.controllers.CuentaControllerWebTestClientTests.testListar2(CuentaControllerWebTestClientTests.java:141)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

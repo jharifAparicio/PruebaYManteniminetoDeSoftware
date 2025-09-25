@@ -1,0 +1,4 @@
+org\sqa\test\springboot\app\controllers\CuentaControllerWebTestClientTests.class
+org\sqa\test\springboot\app\controllers\CuentaControllerTest.class
+org\sqa\test\springboot\app\IntegracionJpaTest.class
+org\sqa\test\springboot\app\SpringbootTestApplicationTests.class
