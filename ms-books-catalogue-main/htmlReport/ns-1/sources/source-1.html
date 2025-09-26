@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>Coverage Report > LibrosController</title>
+  <title>Coverage Report > LibrosServiceImpl</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.unir.ms_books_catalogue.controller</a>
+    <a href="../index.html">com.ms_books_catalogue.service</a>
 </div>
 
-<h1>Coverage Summary for Class: LibrosController (com.unir.ms_books_catalogue.controller)</h1>
+<h1>Coverage Summary for Class: LibrosServiceImpl (com.ms_books_catalogue.service)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -45,7 +45,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">LibrosController</td>
+  <td class="name">LibrosServiceImpl</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -56,26 +56,26 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    85,7%
   </span>
   <span class="absValue">
-    (7/7)
+    (6/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    39,5%
   </span>
   <span class="absValue">
-    (12/12)
+    (15/38)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    45,8%
   </span>
   <span class="absValue">
-    (27/27)
+    (22/48)
   </span>
 </td>
 </tr>
@@ -87,95 +87,110 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.unir.ms_books_catalogue.controller;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.ms_books_catalogue.service;
 &nbsp;
-&nbsp;import model.controller.com.ms_books_catalogue.LibroDto;
-&nbsp;import model.data.com.ms_books_catalogue.Libro;
-&nbsp;import service.com.ms_books_catalogue.LibrosService;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import com.github.fge.jsonpatch.JsonPatchException;
+&nbsp;import com.github.fge.jsonpatch.mergepatch.JsonMergePatch;
+&nbsp;import com.ms_books_catalogue.controller.model.LibroDto;
+&nbsp;import com.ms_books_catalogue.data.LibroRepository;
+&nbsp;import com.ms_books_catalogue.data.model.Libro;
 &nbsp;import lombok.RequiredArgsConstructor;
 &nbsp;import lombok.extern.slf4j.Slf4j;
-&nbsp;import org.springframework.http.HttpStatus;
-&nbsp;import org.springframework.http.ResponseEntity;
-&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;import org.springframework.util.StringUtils;
 &nbsp;
-&nbsp;import java.util.Collections;
 &nbsp;import java.util.List;
-&nbsp;import java.util.Map;
 &nbsp;
-&nbsp;@RestController
-&nbsp;@RequiredArgsConstructor
+&nbsp;@Service
 <b class="fc">&nbsp;@Slf4j</b>
-&nbsp;public class LibrosController {
+&nbsp;@RequiredArgsConstructor
+&nbsp;public class LibrosServiceImpl implements LibrosService {
 &nbsp;
-&nbsp;    private final LibrosService service;
+&nbsp;    private final LibroRepository repository;
+&nbsp;    private final ObjectMapper objectMapper;
 &nbsp;
-&nbsp;    @GetMapping(&quot;/libros&quot;)
-&nbsp;    public ResponseEntity&lt;List&lt;Libro&gt;&gt; getLibros(
-&nbsp;            @RequestHeader Map&lt;String, String&gt; headers,
-&nbsp;            @RequestParam(required = false) String titulo,
-&nbsp;            @RequestParam(required = false) String autor,
-&nbsp;            @RequestParam(required = false) String editorial,
-&nbsp;            @RequestParam(required = false) Integer anio,
-&nbsp;            @RequestParam(required = false) String resumen,
-&nbsp;            @RequestParam(required = false) String genero,
-&nbsp;            @RequestParam(required = false) Boolean visible) {
-<b class="fc">&nbsp;        log.info(&quot;headers:{}&quot;, headers);</b>
-<b class="fc">&nbsp;        List&lt;Libro&gt; libros = service.getLibros(titulo, autor, editorial, anio, resumen, genero, visible);</b>
-<b class="fc">&nbsp;        if(libros != null) {</b>
-<b class="fc">&nbsp;            return ResponseEntity.ok(libros);</b>
-&nbsp;        }else{
-<b class="fc">&nbsp;            return ResponseEntity.ok(Collections.emptyList());</b>
+&nbsp;    @Override
+&nbsp;    public List&lt;Libro&gt; getLibros(String titulo, String autor, String editorial, Integer anio, String resumen, String genero, Boolean visible) {
+<b class="pc">&nbsp;        if (StringUtils.hasLength(titulo) || StringUtils.hasLength(autor) || StringUtils.hasLength(editorial) || anio != null || StringUtils.hasLength(resumen) || StringUtils.hasLength(genero) || visible != null) {</b>
+<b class="nc">&nbsp;            return repository.search(titulo, autor, editorial, anio, resumen, genero, visible);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        List&lt;Libro&gt; libros = repository.getLibros();</b>
+<b class="pc">&nbsp;        return libros.isEmpty() ? null : libros;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Libro getLibro(String id) {
+<b class="fc">&nbsp;        return repository.getById(Long.valueOf(id));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Boolean eliminarLibro(String id) {
+<b class="nc">&nbsp;        Libro libro = repository.getById(Long.valueOf(id));</b>
+<b class="nc">&nbsp;        if (libro != null) {</b>
+<b class="nc">&nbsp;            repository.delete(libro);</b>
+<b class="nc">&nbsp;            return Boolean.TRUE;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return Boolean.FALSE;</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
-&nbsp;    @GetMapping(&quot;/libros/{libroId}&quot;)
-&nbsp;    public ResponseEntity&lt;Libro&gt; getLibro(@PathVariable String libroId) {
-&nbsp;
-<b class="fc">&nbsp;        log.info(&quot;Request received for product:{}&quot;, libroId);</b>
-<b class="fc">&nbsp;        Libro libro = service.getLibro(libroId);</b>
-<b class="fc">&nbsp;        if(libro != null) {</b>
-<b class="fc">&nbsp;            return ResponseEntity.ok(libro);</b>
-&nbsp;        }else{
-<b class="fc">&nbsp;            return ResponseEntity.notFound().build();</b>
+&nbsp;    @Override
+&nbsp;    public Libro crearLibro(LibroDto libroCrear) {
+<b class="pc">&nbsp;        if (libroCrear != null &amp;&amp; StringUtils.hasLength(libroCrear.getTitulo().trim())</b>
+<b class="nc">&nbsp;                &amp;&amp; StringUtils.hasLength(libroCrear.getAutor().trim())</b>
+<b class="nc">&nbsp;                &amp;&amp; StringUtils.hasLength(libroCrear.getEditorial().trim())</b>
+<b class="nc">&nbsp;                &amp;&amp; StringUtils.hasLength(libroCrear.getGenero().trim())</b>
+<b class="nc">&nbsp;                &amp;&amp; libroCrear.getPrecio() != null</b>
+<b class="nc">&nbsp;                &amp;&amp; libroCrear.getStock() != null</b>
+<b class="nc">&nbsp;                &amp;&amp; libroCrear.getVisible() != null) {</b>
+<b class="nc">&nbsp;            Libro libro = Libro.builder()</b>
+<b class="nc">&nbsp;                    .titulo(libroCrear.getTitulo())</b>
+<b class="nc">&nbsp;                    .autor(libroCrear.getAutor())</b>
+<b class="nc">&nbsp;                    .editorial(libroCrear.getEditorial())</b>
+<b class="nc">&nbsp;                    .anio(libroCrear.getAnio())</b>
+<b class="nc">&nbsp;                    .isbn(libroCrear.getIsbn())</b>
+<b class="nc">&nbsp;                    .resumen(libroCrear.getResumen())</b>
+<b class="nc">&nbsp;                    .genero(libroCrear.getGenero())</b>
+<b class="nc">&nbsp;                    .precio(libroCrear.getPrecio())</b>
+<b class="nc">&nbsp;                    .imagen(libroCrear.getImagen())</b>
+<b class="nc">&nbsp;                    .stock(libroCrear.getStock())</b>
+<b class="nc">&nbsp;                    .visible(libroCrear.getVisible())</b>
+<b class="nc">&nbsp;                    .build();</b>
+<b class="nc">&nbsp;            return repository.save(libro);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return null;</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
-&nbsp;    @DeleteMapping(&quot;/libros/{libroId}&quot;)
-&nbsp;    public ResponseEntity&lt;Void&gt; deleteLibro(@PathVariable String libroId) {
-<b class="fc">&nbsp;        Boolean eliminado = service.eliminarLibro(libroId);</b>
-<b class="fc">&nbsp;        if(eliminado) {</b>
-<b class="fc">&nbsp;            return ResponseEntity.ok().build();</b>
-&nbsp;        }else{
-<b class="fc">&nbsp;            return ResponseEntity.notFound().build();</b>
+&nbsp;    @Override
+&nbsp;    public Libro actualizarLibro(String id, String libroModificar) {
+<b class="fc">&nbsp;        Libro libro = repository.getById(Long.valueOf(id));</b>
+<b class="fc">&nbsp;        if (libro != null) {</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                JsonMergePatch jsonMergePatch = JsonMergePatch.fromJson(objectMapper.readTree(libroModificar));</b>
+<b class="fc">&nbsp;                JsonNode target = jsonMergePatch.apply(objectMapper.readTree(objectMapper.writeValueAsString(libro)));</b>
+<b class="fc">&nbsp;                Libro libroActualizado = objectMapper.treeToValue(target, Libro.class);</b>
+<b class="fc">&nbsp;                repository.save(libroActualizado);</b>
+<b class="fc">&nbsp;                return libroActualizado;</b>
+&nbsp;            } catch (JsonProcessingException | JsonPatchException e) {
+<b class="fc">&nbsp;                log.error(&quot;Error al actualizar el libro {}&quot;, id, e);</b>
+&nbsp;            }
 &nbsp;        }
-&nbsp;    }
-&nbsp;    @PostMapping(&quot;/libros&quot;)
-&nbsp;    public ResponseEntity&lt;Libro&gt; addLibro(@RequestBody LibroDto createBody) {
-<b class="fc">&nbsp;        Libro libroCreado = service.crearLibro(createBody);</b>
-<b class="fc">&nbsp;        if(libroCreado != null) {</b>
-<b class="fc">&nbsp;            return ResponseEntity.status(HttpStatus.CREATED).body(libroCreado);</b>
-&nbsp;        }else{
-<b class="fc">&nbsp;            return ResponseEntity.badRequest().build();</b>
-&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    @PatchMapping(&quot;/libros/{libroId}&quot;)
-&nbsp;    public ResponseEntity&lt;Libro&gt; patchLibro(@PathVariable String libroId, @RequestBody String libroActualizar) {
-<b class="fc">&nbsp;        Libro libroActualizado = service.actualizarLibro(libroId, libroActualizar);</b>
-<b class="fc">&nbsp;        if(libroActualizado != null) {</b>
-<b class="fc">&nbsp;            return ResponseEntity.ok(libroActualizado);</b>
-&nbsp;        }else{
-<b class="fc">&nbsp;            return ResponseEntity.notFound().build();</b>
-&nbsp;        }
-&nbsp;    }
-&nbsp;
-&nbsp;    @PutMapping(&quot;/libros/{libroId}&quot;)
-&nbsp;    public ResponseEntity&lt;Libro&gt; updateLibro(@PathVariable String libroId, @RequestBody LibroDto libroActualizar) {
-<b class="fc">&nbsp;        Libro libroActualizado = service.actualizarLibro(libroId, libroActualizar);</b>
-<b class="fc">&nbsp;        if(libroActualizado != null) {</b>
-<b class="fc">&nbsp;            return ResponseEntity.ok(libroActualizado);</b>
-&nbsp;        }else{
-<b class="fc">&nbsp;            return ResponseEntity.notFound().build();</b>
+&nbsp;    @Override
+&nbsp;    public Libro actualizarLibro(String id, LibroDto libroModificar) {
+<b class="fc">&nbsp;        Libro libro = repository.getById(Long.valueOf(id));</b>
+<b class="fc">&nbsp;        if (libro != null) {</b>
+<b class="fc">&nbsp;            libro.update(libroModificar);</b>
+<b class="fc">&nbsp;            repository.save(libro);</b>
+<b class="fc">&nbsp;            return libro;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return null;</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;}
@@ -202,7 +217,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-09-18 14:52</div>
+    <div style="float:right;">generated on 2025-09-23 18:56</div>
 </div>
 </body>
 </html>
