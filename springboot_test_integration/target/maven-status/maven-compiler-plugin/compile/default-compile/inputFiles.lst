@@ -1,0 +1,12 @@
+C:\PRUEBAS_TESTING\integracion\springboot_test_integration\src\main\java\org\sqa\test\springboot\app\controllers\CuentaController.java
+C:\PRUEBAS_TESTING\integracion\springboot_test_integration\src\main\java\org\sqa\test\springboot\app\Datos.java
+C:\PRUEBAS_TESTING\integracion\springboot_test_integration\src\main\java\org\sqa\test\springboot\app\exceptions\DineroInsuficienteException.java
+C:\PRUEBAS_TESTING\integracion\springboot_test_integration\src\main\java\org\sqa\test\springboot\app\models\Banco.java
+C:\PRUEBAS_TESTING\integracion\springboot_test_integration\src\main\java\org\sqa\test\springboot\app\models\Cuenta.java
+C:\PRUEBAS_TESTING\integracion\springboot_test_integration\src\main\java\org\sqa\test\springboot\app\models\TransaccionDto.java
+C:\PRUEBAS_TESTING\integracion\springboot_test_integration\src\main\java\org\sqa\test\springboot\app\repositories\BancoRepository.java
+C:\PRUEBAS_TESTING\integracion\springboot_test_integration\src\main\java\org\sqa\test\springboot\app\repositories\CuentaRepository.java
+C:\PRUEBAS_TESTING\integracion\springboot_test_integration\src\main\java\org\sqa\test\springboot\app\services\CuentaService.java
+C:\PRUEBAS_TESTING\integracion\springboot_test_integration\src\main\java\org\sqa\test\springboot\app\services\CuentaServiceImpl.java
+C:\PRUEBAS_TESTING\integracion\springboot_test_integration\src\main\java\org\sqa\test\springboot\app\SpringbootTestApplication.java
+C:\PRUEBAS_TESTING\integracion\springboot_test_integration\src\main\java\org\sqa\test\springboot\app\SpringFoxConfig.java

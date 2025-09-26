@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.sqa.test.springboot.app.controllers.CuentaControllerTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.533 s -- in org.sqa.test.springboot.app.controllers.CuentaControllerTest
