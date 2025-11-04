@@ -1,1 +1,3 @@
 /api-reservations/target/
+
+**/node_modules
