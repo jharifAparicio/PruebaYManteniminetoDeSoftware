@@ -1,5 +1,5 @@
 {
-  "name": "parcial_2",
+  "name": "intento-2",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,13 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "cypress": "^15.5.0"
+    "@badeball/cypress-cucumber-preprocessor": "^23.2.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.7",
+    "cypress": "15.6.0",
+    "cypress-cucumber-preprocessor": "4.3.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": false,
+    "step_definitions": "cypress/e2e/Tests"
   }
 }
